@@ -22,7 +22,10 @@
 
 html {
     scroll-behavior: smooth;
+
 }
+
+/* index design starts here */
 
 body {
     background:
@@ -113,6 +116,9 @@ a {
 
 .navigation a.active {
     transform: translateY(-1px);
+
+/* magazine design starts here */
+
 }
 
 .hero {
@@ -193,6 +199,8 @@ a {
     color: rgba(255, 249, 245, 0.74);
 }
 
+/* diri mahuman ang magazine na edit btw */
+
 .explore-button {
     display: inline-flex;
     align-items: center;
@@ -222,6 +230,9 @@ a {
 .explore-button:hover span {
     transform: translateY(3px);
 }
+
+
+/* main magazine design */
 
 .magazine-cover {
     width: min(360px, 100%);
@@ -300,6 +311,8 @@ a {
     gap: 80px;
 }
 
+/* section headings */
+
 .section-label {
     display: flex;
     align-items: flex-start;
@@ -376,6 +389,8 @@ a {
     line-height: 1.7;
     color: var(--brown);
 }
+
+/* section cards (fil clved eng references) */
 
 .section-card {
     min-height: 260px;
@@ -618,6 +633,8 @@ footer > a:hover {
     color: var(--soft-pink);
 }
 
+/* responsive design starts here btw */
+
 @media (max-width: 900px) {
     .navbar {
         padding: 20px 5vw;
@@ -731,6 +748,9 @@ footer > a:hover {
     
 }
 
+/* diri mahuman ang index */
+/* english starts here, main bg design */
+
 .page-hero {
     min-height: 560px;
     padding: 100px 8vw;
@@ -827,6 +847,8 @@ footer > a:hover {
     font-weight: 700;
     letter-spacing: 0.2em;
 }
+
+/* work introduction start (headings and labels) */
 
 .work-introduction {
     padding: 120px 8vw;
@@ -1038,6 +1060,8 @@ footer > a:hover {
     margin: 0;
 }
 
+/* if mag include ng playscript presets for each line (dialogue, stage directions, etc) start dito */
+
 .stage-direction {
     margin: 35px 0;
     color: #7A4A50;
@@ -1222,6 +1246,8 @@ footer > a:hover {
     text-transform: uppercase;
     letter-spacing: 0.14em;
 }
+
+/* respponsive design for english starts here */
 
 @media (max-width: 900px) {
 
