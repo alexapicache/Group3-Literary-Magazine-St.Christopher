@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>When the Young Speaks | Our Literary Magazine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-star">*</span>
+            <span>OUR LITERARY MAGAZINE</span>
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="filipino.html">Filipino</a>
+            <a href="clved.html">CLVED</a>
+            <a href="english.html" class="active">English</a>
+            <a href="references.html">References</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="page-hero">
+
+            <div class="page-hero-content">
+
+                <p class="issue-label">
+                    SECTION 01
+                </p>
+
+                <p class="issue-number">
+                    ENGLISH LITERATURE
+                </p>
+
+                <h1>
+                    When the
+                    <em>Young</em>
+                    Speaks.
+                </h1>
+
+                <p>
+                    An original multimodal one-act play exploring
+                    voice, political awareness, family, and the
+                    importance of making informed choices.
+                </p>
+
+            </div>
+
+            <div class="page-number">
+                ENGLISH
+            </div>
+
+        </section>
+
+        <section class="work-introduction">
+
+            <div class="section-label">
+                <span>01</span>
+                <p>
+                    THE WORK
+                </p>
+            </div>
+
+            <div class="work-introduction-content">
+
+                <p class="small-heading">
+                    ORIGINAL MULTIMODAL WORK
+                </p>
+
+                <h2>
+                    A story brought
+                    <span>to life.</span>
+                </h2>
+
+                <p>
+                    <strong>When the Young Speaks</strong> is an original
+                    multimodal one-act play that explores the importance
+                    of informed decision-making and the power of young
+                    voices.
+                </p>
+
+                <p>
+                    Through the story of Amethyst Mae Lozano and her
+                    family, the play presents a conflict between
+                    popularity and credentials, questioning how people
+                    determine who deserves their trust.
+                </p>
+
+                <div class="work-details">
+
+                    <div>
+                        <span>FORM</span>
+                        <strong>One-Act Play</strong>
+                    </div>
+
+                    <div>
+                        <span>LANGUAGE</span>
+                        <strong>English</strong>
+                    </div>
+
+                    <div>
+                        <span>TYPE</span>
+                        <strong>Multimodal Literature</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="play-section">
+
+            <div class="play-header">
+
+                <p class="small-heading">
+                    THE ORIGINAL PLAY
+                </p>
+
+                <h2>
+                    When the Young Speaks
+                </h2>
+
+                <p class="play-description">
+                    Written and performed by the members of our group.
+                </p>
+
+            </div>
+
+            <div class="video-feature">
+
+                <div class="video-card" onclick="openVideo()">
+
+                    <div class="video-card-image">
+                        <img src="cover.JPG" alt="When the Young Speaks">
+                    </div>
+
+                    <div class="video-card-content">
+
+                        <div>
+                            <p>OUR MULTIMODAL WORK</p>
+                            <h3>When the Young Speaks</h3>
+                        </div>
+
+                        <div class="video-play">
+                            <span>PLAY</span>
+                            <strong>&#9654;</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="authors">
+
+            <div class="section-label">
+
+                <span>02</span>
+
+                <p>
+                    THE CREATORS
+                </p>
+
+            </div>
+
+            <div class="authors-content">
+
+                <p class="small-heading">
+                    THE WRITERS
+                </p>
+
+                <h2>
+                    Behind the
+                    <span>story.</span>
+                </h2>
+
+                <div class="author-list">
+
+                    <div class="author">
+                        <span>01</span>
+                        <h3>Gabrielle Ilaya</h3>
+                        <p>Playwright</p>
+                    </div>
+
+                    <div class="author">
+                        <span>02</span>
+                        <h3>Marchaela Doble</h3>
+                        <p>Playwright</p>
+                    </div>
+
+                    <div class="author">
+                        <span>03</span>
+                        <h3>Alexa Picache</h3>
+                        <p>Website Developer</p>
+                    </div>
+
+                    <div class="author">
+                        <span>04</span>
+                        <h3>Ciarra Dalapo</h3>
+                        <p>Literary Analyst</p>
+                    </div>
+
+                    <div class="author">
+                        <span>05</span>
+                        <h3>Pauline Atablanco</h3>
+                        <p>Reflection Writer</p>
+                    </div>
+
+                    <div class="author">
+                        <span>06</span>
+                        <h3>Jhoanna Catin</h3>
+                        <p>Reflection Writer</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <div class="video-modal" id="videoModal">
+
+        <button class="close-video" onclick="closeVideo()">
+            &times;
+        </button>
+
+        <div class="video-container">
+
+            <video id="playVideo" controls>
+                <source src="when-the-young-speaks.mp4" type="video/mp4">
+            </video>
+
+        </div>
+
+    </div>
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <span class="logo-star">
+                *
+            </span>
+
+            <strong>
+                OUR MAGAZINE
+            </strong>
+
+        </div>
+
+        <p>
+            A student literary publication &middot; 2026
+        </p>
+
+        <a href="#top">
+            Back to top
+        </a>
+
+    </footer>
+
+    <script>
+        function openVideo() {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("playVideo");
+
+            modal.classList.add("open");
+            video.play();
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById("videoModal");
+            const video = document.getElementById("playVideo");
+
+            video.pause();
+            video.currentTime = 0;
+            modal.classList.remove("open");
+        }
+
+        document.getElementById("videoModal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeVideo();
+            }
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                closeVideo();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

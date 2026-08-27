@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Literary Magazine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .magazine-wrap {
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .magazine-glow {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(173, 40, 49, 0.08);
+            filter: blur(55px);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .magazine-cover {
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition:
+                transform 0.5s ease,
+                box-shadow 0.5s ease;
+        }
+
+        .magazine-cover:hover {
+            transform: rotate(2deg) translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .magazine-cover::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            pointer-events: none;
+            transform: translateZ(20px);
+        }
+
+        .magazine-cover .cover-center {
+            transform: translateZ(35px);
+        }
+
+        .magazine-cover .cover-top,
+        .magazine-cover .cover-bottom {
+            transform: translateZ(25px);
+        }
+
+        .cover-star {
+            display: inline-block;
+            transition: transform 0.5s ease;
+        }
+
+        .magazine-cover:hover .cover-star {
+            transform: rotate(180deg) scale(1.2);
+        }
+
+        .section-card {
+            transition:
+                transform 0.45s cubic-bezier(.2, .8, .2, 1),
+                box-shadow 0.45s ease;
+            transform-style: preserve-3d;
+        }
+
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-card .card-number {
+            transition: transform 0.4s ease;
+        }
+
+        .section-card:hover .card-number {
+            transform: translateX(7px);
+        }
+
+        .section-card .card-symbol {
+            transition: transform 0.5s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .section-card:hover .card-symbol {
+            transform: rotate(18deg) scale(1.12);
+        }
+
+        .section-card strong {
+            display: inline-block;
+            transition: transform 0.35s ease;
+        }
+
+        .section-card:hover strong {
+            transform: translate(5px, -5px);
+        }
+
+        .navigation a {
+            position: relative;
+        }
+
+        .navigation a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s ease;
+        }
+
+        .navigation a:hover::after,
+        .navigation a.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .explore-button span {
+            display: inline-block;
+            transition: transform 0.35s ease;
+        }
+
+        .explore-button:hover span {
+            transform: translateY(5px);
+        }
+
+        .editor-signature {
+            transition: transform 0.3s ease;
+        }
+
+        .editor-signature:hover {
+            transform: translateX(8px);
+        }
+
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.18;
+            font-family: "Playfair Display", serif;
+            animation: floatDecoration 7s ease-in-out infinite;
+        }
+
+        .decoration-one {
+            top: 18%;
+            left: 4%;
+            font-size: 42px;
+        }
+
+        .decoration-two {
+            top: 42%;
+            right: 5%;
+            font-size: 28px;
+            animation-delay: 1.5s;
+        }
+
+        .decoration-three {
+            top: 76%;
+            left: 8%;
+            font-size: 22px;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatDecoration {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(8deg);
+            }
+        }
+
+        .scroll-line {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 0;
+            background: #AD2831;
+            z-index: 9999;
+            transition: height 0.1s linear;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .floating-decoration,
+            .scroll-line {
+                display: none;
+            }
+
+            .magazine-cover {
+                transform: none !important;
+            }
+
+            .magazine-cover:hover {
+                transform: translateY(-5px) scale(1.01) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-line"></div>
+
+    <span class="floating-decoration decoration-one">✦</span>
+    <span class="floating-decoration decoration-two">✧</span>
+    <span class="floating-decoration decoration-three">+</span>
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-star">✦</span>
+            <span>OUR LITERARY MAGAZINE</span>
+        </a>
+
+        <nav class="navigation">
+
+            <a href="index.html" class="active">
+                Home
+            </a>
+
+            <a href="filipino.html">
+                Filipino
+            </a>
+
+            <a href="clved.html">
+                CLVED
+            </a>
+
+            <a href="english.html">
+                English
+            </a>
+
+            <a href="references.html">
+                References
+            </a>
+
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section class="hero reveal">
+
+            <div class="hero-text">
+
+                <p class="issue-label">
+                    DIGITAL LITERARY MAGAZINE
+                </p>
+
+                <p class="issue-number">
+                    VOL. I 2026-2027
+                </p>
+
+                <h1>
+                    <span>Stories.</span>
+                    <br>
+                    Reflections.
+                    <br>
+                    <em>Perspectives.</em>
+                </h1>
+
+                <p class="hero-description">
+                    A collection of creative works, thoughtful reflection, and literary perspectives brought together through language, culture, faith, and imagination.
+                </p>
+
+                <a href="#explore" class="explore-button">
+                    Explore the Issue
+                    <span>&darr;</span>
+                </a>
+
+            </div>
+
+            <div class="magazine-wrap">
+
+                <div class="magazine-glow"></div>
+
+                <div class="magazine-cover">
+
+                    <div class="cover-top">
+                        <span>THE</span>
+                        <span>2026</span>
+                    </div>
+
+                    <div class="cover-center">
+
+                        <span class="cover-star">
+                            ✦
+                        </span>
+
+                        <h2>
+                            OUR
+                            <br>
+                            <span>LITERARY</span>
+                            <br>
+                            MAGAZINE
+                        </h2>
+
+                        <p>
+                            STORIES - VOICES - IDEAS
+                        </p>
+
+                    </div>
+
+                    <div class="cover-bottom">
+                        <span>VOL. 01</span>
+                        <span>EST. 2026</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="introduction reveal">
+
+            <div class="section-label">
+                <span>01</span>
+                <p>
+                    THE PURPOSE
+                </p>
+            </div>
+
+            <div class="intro-content">
+
+                <p class="small-heading">
+                    A SPACE FOR VOICES
+                </p>
+
+                <h2>
+                    Where ideas become
+                    <span>stories.</span>
+                </h2>
+
+                <p>
+                    This literary magazine serves as a creative and academic space where different forms of writing come together. Through our original works, reflections, and literary analysis, we explore the ways stories can express ideas, values, experiences, and perspectives.
+                </p>
+
+                <p>
+                    More than simply presenting our outputs, this collection represents our voices as students and creators --- showing how literature can connect imagination with real-life experiences and meaningful conversations.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="explore reveal" id="explore">
+
+            <div class="explore-heading">
+
+                <div>
+
+                    <p class="small-heading">
+                        THE ISSUE
+                    </p>
+
+                    <h2>
+                        Explore our
+                        <span>sections</span>
+                    </h2>
+
+                </div>
+
+                <p class="explore-description">
+                    Choose a section below to explore our literary and academic works.
+                </p>
+
+            </div>
+
+            <a href="filipino.html" class="section-card filipino-card">  
+
+                <div class="card-number">
+                    01
+                </div>
+
+                <div class="card-content">
+
+                    <p>
+                        FILIPINO
+                    </p>
+
+                    <h3>
+                        Pagsusuri
+                        <br>
+                        sa Panitikan
+                    </h3>
+
+                    <span>
+                        Enter Section
+                        <strong>&#8599;</strong>
+                    </span>
+
+                </div>
+
+                <div class="card-symbol">
+                    &#10022;
+                </div>
+
+            </a>
+
+            <a href="clved.html" class="section-card clved-card">
+
+                <div class="card-number">
+                    02
+                </div>
+
+                <div class="card-content">
+
+                    <p>
+                        CLVED
+                    </p>
+
+                    <h3>
+                        Reflections
+                        <br>
+                        on Christian Living
+                    </h3>
+
+                    <span>
+                        Enter Section
+                        <strong>&#8599;</strong>
+                    </span>
+
+                </div>
+
+                <div class="card-symbol">
+                    &#10023;
+                </div>
+
+            </a>
+
+            <a href="english.html" class="section-card english-card">
+
+                <div class="card-number">
+                    03
+                </div>
+
+                <div class="card-content">
+
+                    <p>
+                        ENGLISH
+                    </p>
+
+                    <h3>
+                        Original
+                        <br>
+                        One-Act Play
+                    </h3>
+
+                    <span>
+                        Enter Section
+                        <strong>&#8599;</strong>
+                    </span>
+
+                </div>
+
+                <div class="card-symbol">
+                    &#10022;
+                </div>
+
+            </a>
+
+            <a href="references.html" class="section-card references-card">
+
+                <div class="card-number">
+                    04
+                </div>
+
+                <div class="card-content">
+
+                    <p>
+                        REFERENCES
+                    </p>
+
+                    <h3>
+                        Sources &amp;
+                        <br>
+                        Acknowledgements
+                    </h3>
+
+                    <span>
+                        View Sources
+                        <strong>&#8599;</strong>
+                    </span>
+
+                </div>
+
+                <div class="card-symbol">
+                    &#10023;
+                </div>
+
+            </a>
+
+        </section>
+
+        <section class="editors-note reveal">
+
+            <div class="note-label">
+                <span>
+                    EDITOR'S NOTE
+                </span>
+            </div>
+
+            <div class="note-content">
+
+                <div class="quote-mark">
+                    “
+                </div>
+
+                <h2>
+                    Every story carries
+                    <em>a voice.</em>
+                </h2>
+
+                <p>
+                    Welcome to our literary magazine. This collection is a reflection of our creativity, perspectives, and experiences as students. Each section presents a different way of understanding the world, from storytelling and literature to faith, culture, and personal reflection.
+                </p>
+
+                <p>
+                    We hope that as you explore these pages, you do more than simply read. We hope you pause, reflect, question, and find something that means something to you.
+                </p>
+
+                <div class="editor-signature">
+                    - The Team
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="team reveal">
+
+            <div class="section-label">
+                <span>03</span>
+                <p>
+                    THE PEOPLE BEHIND THE MAGAZINE
+                </p>
+            </div>
+
+            <div class="team-content">
+
+                <h2>
+                    The
+                    <span>Editorial Team.</span>
+                </h2>
+
+                <p>
+                    Created, written, designed, and compiled by:
+                </p>
+
+                <div class="member">
+                    <span>01</span>
+                    <h3>Gabrielle Ilaya</h3>
+                    <p>Playwright</p>
+                </div>
+
+                <div class="member">
+                    <span>02</span>
+                    <h3>Marchaela Doble</h3>
+                    <p>Playwright</p>
+                </div>
+
+                <div class="member">
+                    <span>03</span>
+                    <h3>Alexa Picache</h3>
+                    <p>Website Developer</p>
+                </div>
+
+                <div class="member">
+                    <span>04</span>
+                    <h3>Ciarra Dalapo</h3>
+                    <p>Literary Analyst</p>
+                </div>
+
+                <div class="member">
+                    <span>05</span>
+                    <h3>Pauline Atablanco</h3>
+                    <p>Reflection Writer</p>
+                </div>
+
+                <div class="member">
+                    <span>06</span>
+                    <h3>Jhoanna Catin</h3>
+                    <p>Reflection Writer</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <span class="logo-star">
+                &#10022;
+            </span>
+
+            <strong>
+                OUR MAGAZINE
+            </strong>
+
+        </div>
+
+        <p>
+            A student literary publication &middot; 2026
+        </p>
+
+        <a href="#">
+            Back to top &uarr;
+        </a>
+
+    </footer>
+
+    <script>
+        window.addEventListener("load", function () {
+            document.body.classList.add("loaded");
+        });
+
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const revealObserver = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(function (element) {
+            revealObserver.observe(element);
+        });
+
+        window.addEventListener("scroll", function () {
+            const scrollTop = window.scrollY;
+            const documentHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+
+            const progress =
+                documentHeight > 0
+                    ? (scrollTop / documentHeight) * 100
+                    : 0;
+
+            document.querySelector(".scroll-line").style.height =
+                `${progress}%`;
+        });
+    </script>
+
+</body>
+
+</html>
